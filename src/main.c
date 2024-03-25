@@ -1,7 +1,7 @@
 /*Um menu com as seguintes opções deverá ser apresentado:   
 1. Adicionar paciente;  - TAD paciente
 2. Remover paciente;    - TAD paciente 
-3. Adicionar consulta;   
+3. Adicionar consulta;
 4. Remover consulta;   
 5. Editar informação de paciente;   
 6. Buscar paciente por nome;  
@@ -15,8 +15,8 @@ alfabética (para isso, você pode utilizar as funções da biblioteca padrão d
 dos dados em virtude da adição ou remoção.
 */
 #include <stdio.h>
-#include "consultas/consultas.h"
-#include "paciente/paciente.h"
+#include "include/consultas.h"
+#include "include/paciente.h"
 
 void menu(void) {
     printf("------------------- MENU -------------------\n");
