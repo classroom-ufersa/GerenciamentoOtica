@@ -15,8 +15,9 @@ alfabética (para isso, você pode utilizar as funções da biblioteca padrão d
 dos dados em virtude da adição ou remoção.
 */
 #include <stdio.h>
-#include "include/consultas.h"
-#include "include/paciente.h"
+#include "../include/consultas.h"
+#include "../include/paciente.h"
+#include "../include/retrativas.h"
 
 void menu(void) {
     printf("------------------- MENU -------------------\n");
@@ -32,5 +33,5 @@ void menu(void) {
 }
 
 int main(void){
-    menu();
+    adiciona_consulta();
 }
