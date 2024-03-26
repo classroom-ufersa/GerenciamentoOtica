@@ -63,3 +63,29 @@ int contem_apenas_letras(char *str) {
     }
     return 1;
 }
+
+int verifica_cpf(char *cpf_digitado) {
+    char linha[300];
+    char cpf_arquivo[100];
+    char idade_arquivo[100];
+    char nome_arquivo[100];
+
+    FILE *arquivo = fopen("pacientes.txt", "r"); 
+    if (arquivo == NULL) {
+        printf("\nErro ao abrir o arquivo.");
+        return menu; 
+    }
+
+    while (fgets(linha, sizeof(linha), arquivo) != NULL) { 
+        if (sscanf(linha, "%99[^\t]\t%11[^\t]\t%2[^\t ]", nome_arquivo, cpf_arquivo, idade_arquivo) == 3) {
+            if (strcmp(cpf_arquivo, cpf_digitado) == 0) {
+                printf("\nEsse cliente ja foi cadastrado.");
+                fclose(arquivo);
+                return 1; 
+            }
+        }
+    }
+
+    fclose(arquivo);
+    return 0; 
+}
