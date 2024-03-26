@@ -14,17 +14,29 @@ A organização desta parte está disposta da seguinte forma:
 ``` 
 📁 - GerenciamentoOtica
 │
-└─── consultas
+└─── bin
+│
+└─── include
+        │
+        ├──consultas.h
+        ├──paciente.h
+        ├──retrativas.h
+│
+└─── resources
+        │
+        ├──consultas.txt
+        ├──paciente.txt
+│
+└─── src
         │
         ├──consultas.c
-        ├──consultas.h
-│
-└─── paciente
-        │
+        ├──main.c
         ├──paciente.c
-        ├──paciente.h
+        ├──retrativas.c
 │
-└─── main.c
+└───test
+│
+└───README.md
 ```
 
 ###### Aqui, é válido salientar que as funções implementadas na pasta "consultas" e "paciente" serão chamadas no arquivo main.c, que está fora da pasta.
