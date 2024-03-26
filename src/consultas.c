@@ -5,13 +5,14 @@
 #include "../include/retrativas.h"
 
 typedef struct consulta {
+    char cpf[20];
     char id[10];
     char data[10];
     char preco[10];
     char descricao[100];
+    Consulta *prox_elemento;
 }Consulta;
 
-//coloca as retrativas nesse arquivo?
 void adiciona_consulta() {
     Consulta consulta;
     char *caminho = "resources/consultas.txt";
@@ -21,10 +22,19 @@ void adiciona_consulta() {
         return;
     }
 
+    char cpf_digitado[20];
     char id_digitado[10];
-    char data_digitada[100];
+    char data_digitada[10];
     char preco_digitado[10];
     char descricao_digitada[100]; 
+
+    do{
+    printf("\nDigite o seu CPF: ");
+    scanf("%99[^\n]", cpf_digitado);
+    getchar();
+    }while (!numero_inteiroc(cpf_digitado));
+
+    strcpy(consulta.cpf, cpf_digitado);
 
     do{
     printf("\nDigite o ID da consulta: ");
@@ -56,10 +66,10 @@ void adiciona_consulta() {
     getchar();
     }while (!contem_apenas_letras(descricao_digitada));
 
-    formata_string(descricao_digitada);
+    //formata_string(descricao_digitada);
     strcpy(consulta.descricao, descricao_digitada);
 
-    fprintf(arquivo, "\n%s \t %s \t %s \n", consulta.id, consulta.data, consulta.preco, consulta.descricao);
+    fprintf(arquivo, "\n %s\t%s\t%s\t%s\t%s \n", consulta.cpf, consulta.id, consulta.data, consulta.preco, consulta.descricao);
 
     fclose(arquivo);
 }
