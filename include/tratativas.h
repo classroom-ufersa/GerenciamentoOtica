@@ -1,9 +1,23 @@
+
+#ifndef TRATATIVAS_H
+#define TRATATIVAS_H
+
+// Path: GerenciamentoOtica/include/tratativas.h
+#include "../include/consultas.h"
+
+void cria_lista_consultas(ListaConsultas **lista);
+
 int numero_inteiroc(char *str);
-
-void formata_string(char *str);
-
-int verifica_codigo(char *id_digitado);
 
 int contem_apenas_letras(char *str);
 
-void formata_string(char *str);
+long long data_para_num(char *data);
+
+char *num_para_data(long long data);
+
+int data_valida(char *data);
+
+char *formata_cpf(char *cpf);
+
+
+#endif

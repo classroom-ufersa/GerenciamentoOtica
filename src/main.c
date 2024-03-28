@@ -17,7 +17,8 @@ dos dados em virtude da adição ou remoção.
 #include <stdio.h>
 #include "../include/consultas.h"
 #include "../include/paciente.h"
-#include "../include/retrativas.h"
+#include "../include/tratativas.h"
+
 
 void menu(void) {
     printf("------------------- MENU -------------------\n");
@@ -33,5 +34,10 @@ void menu(void) {
 }
 
 int main(void){
-    adiciona_consulta();
+    ListaConsultas *lista;
+    cria_lista_consultas(&lista);
+    adicionar_consulta(&lista);
+    imprimir_consultas(&lista);
+    
+    return 0;
 }

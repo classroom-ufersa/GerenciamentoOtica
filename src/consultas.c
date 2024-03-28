@@ -2,9 +2,9 @@
 #include <stdlib.h>
 #include <string.h>
 #include "../include/consultas.h"
-#include "../include/retrativas.h"
+#include "../include/tratativas.h"
 
-typedef struct consulta {
+typedef struct consulta{
     char cpf[20];
     char id[10];
     char data[10];
@@ -13,63 +13,139 @@ typedef struct consulta {
     Consulta *prox_elemento;
 }Consulta;
 
-void adiciona_consulta() {
+typedef struct lista_consultas {
     Consulta consulta;
-    char *caminho = "resources/consultas.txt";
-    FILE *arquivo = fopen(caminho, "a"); 
-    if(arquivo == NULL) { 
-        printf("Erro ao abrir o aquivo.\n");
+    struct lista_consultas *prox;
+}ListaConsultas;
+
+void cria_lista_consultas(ListaConsultas **lista) { 
+    *lista = NULL;
+}
+
+int verifica_cpf(ListaConsultas **lista, char cpf[20]){
+    ListaConsultas *listaAux = *lista; 
+
+    while(listaAux != NULL){ 
+        if(strcmp(listaAux->consulta.cpf, cpf) == 0){ 
+            return 0;
+        }
+        listaAux = listaAux->prox; 
+    }
+    return 1;
+}
+
+int verifica_id_consulta(ListaConsultas **lista, char id[10]) {
+    ListaConsultas *listaAux = *lista; 
+
+    while(listaAux != NULL){ 
+        if(strcmp(listaAux->consulta.id, id) == 0){ 
+            printf("ID já existe.\n");
+            return 0;
+        }
+        listaAux = listaAux->prox; 
+    }
+    return 1;
+}
+
+void adicionar_consulta(ListaConsultas **lista) {
+    int continuar = 1; 
+    char cpf[20], id[10], data[10], preco[10], descricao[100];
+    char *cpf_formatado;
+    char *data_format;
+    
+    do {
+        do {
+            printf("Digite o CPF (apenas números): ");
+            scanf("%s", cpf);
+        } while (verifica_cpf(lista, cpf) == 0 || numero_inteiroc(cpf) == 0 || strlen(cpf) != 11); 
+
+        cpf_formatado = formata_cpf(cpf); // Formata o CPF
+
+        do {
+            printf("Digite o ID: ");
+            scanf("%s", id);
+        } while (verifica_id_consulta(lista, id) == 0 || numero_inteiroc(id) == 0); 
+
+        do {
+            printf("Digite a data (DD/MM/AAAA): ");
+            scanf("%s", data);
+        } while (!data_valida(data)); 
+
+        // Convertendo a data para o formato numérico
+        long long data_numerica = data_para_num(data);
+
+        do {
+            printf("Digite o preço: ");
+            scanf("%s", preco);
+        } while (numero_inteiroc(preco) == 0);
+        
+        do {
+            printf("Digite a descrição: ");
+            scanf("%s", descricao);
+        } while (contem_apenas_letras(descricao) == 0);
+        
+        ListaConsultas *novo = (ListaConsultas*)malloc(sizeof(ListaConsultas)); 
+        
+        // Copiando os dados fornecidos para a estrutura de consulta do novo elemento
+        strcpy(novo->consulta.cpf, cpf_formatado);
+        strcpy(novo->consulta.id, id);
+        strcpy(novo->consulta.data, num_para_data(data_numerica)); // Converte a data numérica para formato de string
+        strcpy(novo->consulta.preco, preco);
+        strcpy(novo->consulta.descricao, descricao);
+        
+        novo->prox = *lista; 
+        *lista = novo; 
+        
+        printf("Deseja adicionar outra consulta? (1 - Sim, 0 - Não): ");
+        scanf("%d", &continuar);
+    } while (continuar);
+}
+
+void remover_consulta_por_id(ListaConsultas **lista, char id[10]){
+    ListaConsultas *listaAux = *lista; 
+    ListaConsultas *anterior = NULL; 
+
+    while(listaAux != NULL && strcmp(listaAux->consulta.id, id) != 0){  
+        anterior = listaAux; 
+        listaAux = listaAux->prox; 
+    }
+
+    if(listaAux == NULL){ 
+        printf("Consulta não encontrada\n");
         return;
     }
 
-    char cpf_digitado[20];
-    char id_digitado[10];
-    char data_digitada[10];
-    char preco_digitado[10];
-    char descricao_digitada[100]; 
+    if(anterior == NULL){ 
+        *lista = listaAux->prox;
+    }
+    
+    else{ 
+        anterior->prox = listaAux->prox;
+    }
+    
+    printf("Consulta removida\n"); 
+    free(listaAux);
+}
+void imprimir_consultas (ListaConsultas **lista){ 
+    ListaConsultas *listaAux = *lista; 
 
-    do{
-    printf("\nDigite o seu CPF: ");
-    scanf("%99[^\n]", cpf_digitado);
-    getchar();
-    }while (!numero_inteiroc(cpf_digitado));
+    printf("Consultas:\n");
+    while(listaAux != NULL){ 
+        printf("%s\t %s\t %s\t %s\t %s\n", listaAux->consulta.cpf, listaAux->consulta.id, listaAux->consulta.data, listaAux->consulta.preco, listaAux->consulta.descricao); //imprime os dados da consulta
+        listaAux = listaAux->prox; 
+    }
+}
 
-    strcpy(consulta.cpf, cpf_digitado);
+void adicionar_no_arquivo(ListaConsultas **lista){ 
+    FILE *arquivo; 
+    ListaConsultas *listaAux = *lista; 
 
-    do{
-    printf("\nDigite o ID da consulta: ");
-    scanf("%99[^\n]", id_digitado);
-    getchar();
-    }while (!numero_inteiroc(id_digitado) || verifica_codigo(id_digitado));
+    arquivo = fopen("consultas.txt", "w"); 
 
-    strcpy(consulta.id, id_digitado);
+    while(listaAux != NULL){ 
+        fprintf(arquivo, "%s\t %s\t %s\t %s\t %s\n", listaAux->consulta.cpf, listaAux->consulta.id, listaAux->consulta.data, listaAux->consulta.preco, listaAux->consulta.descricao); //escreve os dados da consulta no arquivo
+        listaAux = listaAux->prox; 
+    }
 
-    do{
-    printf("\nDigite a data da consulta: ");
-    scanf("%99[^\n]", data_digitada);
-    getchar();
-    }while (!numero_inteiroc(data_digitada));
-
-    strcpy(consulta.data, data_digitada);
-
-    do{
-    printf("\nDigite o preço da consulta: ");
-    scanf("%99[^\n]", preco_digitado);
-    getchar();
-    }while (!numero_inteiroc(preco_digitado));
-
-    strcpy(consulta.preco, preco_digitado);
-
-    do{
-    printf("\nDigite a descrição da consulta: ");
-    scanf("%99[^\n]", descricao_digitada);
-    getchar();
-    }while (!contem_apenas_letras(descricao_digitada));
-
-    //formata_string(descricao_digitada);
-    strcpy(consulta.descricao, descricao_digitada);
-
-    fprintf(arquivo, "\n %s\t%s\t%s\t%s\t%s \n", consulta.cpf, consulta.id, consulta.data, consulta.preco, consulta.descricao);
-
-    fclose(arquivo);
+    fclose(arquivo); 
 }
