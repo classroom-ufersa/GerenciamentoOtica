@@ -19,5 +19,6 @@ int data_valida(char *data);
 
 char *formata_cpf(char *cpf);
 
+int verifica_cpf_paciente(ListaPacientes **lista, char cpf[12]);
 
 #endif
