@@ -98,3 +98,15 @@ char *formata_cpf(char *cpf) {
     sprintf(cpf_formatado, "%c%c%c.%c%c%c.%c%c%c-%c%c", cpf[0], cpf[1], cpf[2], cpf[3], cpf[4], cpf[5], cpf[6], cpf[7], cpf[8], cpf[9], cpf[10], cpf[11]);
     return cpf_formatado;
 }
+
+int verifica_cpf_paciente(ListaPacientes **lista, char cpf[12]){
+    ListaPacientes *listaAux = *lista; 
+
+    while(listaAux != NULL){ 
+        if(strcmp(listaAux->paciente.cpf, cpf) == 0){ 
+            return 0;
+        }
+        listaAux = listaAux->prox; 
+    }
+    return 1;
+}
