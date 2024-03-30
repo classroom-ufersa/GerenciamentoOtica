@@ -5,9 +5,9 @@
 #include "../include/tratativas.h"
 
 typedef struct consulta{
-    char cpf[12];
+    char cpf[15];
     char id[10];
-    char data[10];
+    char data[15];
     char preco[10];
     char descricao[100];
     Consulta *prox_elemento;
@@ -22,7 +22,7 @@ void cria_lista_consultas(ListaConsultas **lista) {
     *lista = NULL;
 }
 
-int verifica_cpf(ListaConsultas **lista, char cpf[12]){
+int verifica_cpf(ListaConsultas **lista, char cpf[15]){
     ListaConsultas *listaAux = *lista; 
 
     while(listaAux != NULL){ 
@@ -49,7 +49,7 @@ int verifica_id_consulta(ListaConsultas **lista, char id[10]) {
 
 void adicionar_consulta(ListaConsultas **lista) {
     int continuar = 1; 
-    char cpf[12], id[10], data[10], preco[10], descricao[100];
+    char cpf[15], id[10], data[15], preco[10], descricao[100];
     char *cpf_formatado;
     char *data_format;
     
