@@ -151,22 +151,45 @@ void upper_string(char *str) {
     }
 }
 
-Paciente *buscar_paciente_por_nome(ListaPacientes *lista, char *nome_digitado) {
-    upper_string(nome_digitado); // Converte o nome digitado para letras maiúsculas
+void buscar_paciente_por_nome(ListaPacientes *lista, char *nome) {
+    upper_string(nome); // Converte o nome digitado para letras maiúsculas
 
     ListaPacientes *atual = lista;
+    int encontrado = 0;
 
     while (atual != NULL) {
         char *nome_paciente = atual->paciente.nome;
-        upper_string(nome_paciente); // Converte o nome do paciente na lista para letras maiúsculas
+        upper_string(nome_paciente);
 
         if (strstr(nome_paciente, nome) != NULL) {
-            return &(atual->paciente); // Retorna o endereço do paciente encontrado
+            printf("Paciente encontrado:\n");
+            printf("Nome: %s\n", atual->paciente.nome);
+            printf("CPF: %s\n", atual->paciente.cpf);
+            printf("Idade: %s\n", atual->paciente.idade);
+
+            Consulta *consulta_atual = atual->paciente.historico_consultas;
+            if (consulta_atual != NULL) {
+                printf("Historico de consultas:\n");
+                while (consulta_atual != NULL) {
+                    printf("Data: %s\n", consulta_atual->data);
+                    printf("CPF do paciente: %s\n", consulta_atual->cpf);
+                    printf("ID: %s\n", consulta_atual->id);
+                    printf("Valor da consulta: %s\n", consulta_atual->preco);
+                    printf("Descricao: %s\n", consulta_atual->descricao);
+                    consulta_atual = consulta_atual->prox;
+                }
+            } else {
+                printf("Este paciente ainda não possui histórico de consultas.\n");
+            }
+
+            encontrado = 1;
         }
         atual = atual->prox;
     }
 
-    return NULL; // Retorna NULL se o paciente não for encontrado
+    if (!encontrado) {
+        printf("Paciente não encontrado!\n");
+    }
 }
 
 void busca_paciente() {
