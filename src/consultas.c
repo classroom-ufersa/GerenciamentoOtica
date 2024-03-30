@@ -22,18 +22,6 @@ void cria_lista_consultas(ListaConsultas **lista) {
     *lista = NULL;
 }
 
-int verifica_cpf(ListaConsultas **lista, char cpf[15]){
-    ListaConsultas *listaAux = *lista; 
-
-    while(listaAux != NULL){ 
-        if(strcmp(listaAux->consulta.cpf, cpf) == 0){ 
-            return 0;
-        }
-        listaAux = listaAux->prox; 
-    }
-    return 1;
-}
-
 int verifica_id_consulta(ListaConsultas **lista, char id[10]) {
     ListaConsultas *listaAux = *lista; 
 
@@ -57,7 +45,7 @@ void adicionar_consulta(ListaConsultas **lista) {
         do {
             printf("Digite o CPF (apenas números): ");
             scanf("%s", cpf);
-        } while (verifica_cpf(lista, cpf) == 0 || numero_inteiroc(cpf) == 0 || strlen(cpf) != 11); 
+        } while (verifica_cpf_paciente(lista, cpf) == 0 || numero_inteiroc(cpf) == 0 || strlen(cpf) != 11); 
 
         cpf_formatado = formata_cpf(cpf); // Formata o CPF
 
