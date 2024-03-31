@@ -18,6 +18,7 @@ typedef struct lista_consultas {
     struct lista_consultas *prox;
 }ListaConsultas;
 
+
 void cria_lista_consultas(ListaConsultas **lista) { 
     *lista = NULL;
 }
@@ -89,7 +90,7 @@ void adicionar_consulta(ListaConsultas **lista) {
     } while (continuar);
 }
 
-void remover_consulta_por_id(ListaConsultas **lista, char id[10]){
+/*void remover_consulta_por_id(ListaConsultas **lista, char id[10]){
     ListaConsultas *listaAux = *lista; 
     ListaConsultas *anterior = NULL; 
 
@@ -113,7 +114,57 @@ void remover_consulta_por_id(ListaConsultas **lista, char id[10]){
     
     printf("Consulta removida\n"); 
     free(listaAux);
+}*/
+
+/*testar essa função quando juntar as duas branch*/
+void remover_consulta_e_historico(ListaPacientes **lista_pacientes, ListaConsultas **lista_consultas, char id[10]) {
+    // Remover consulta da lista de consultas
+    ListaConsultas *listaAux = *lista_consultas;
+    ListaConsultas *anterior = NULL;
+
+    while (listaAux != NULL && strcmp(listaAux->consulta.id, id) != 0) {
+        anterior = listaAux;
+        listaAux = listaAux->prox;
+    }
+
+    if (listaAux == NULL) {
+        printf("Consulta não encontrada\n");
+        return;
+    }
+
+    if (anterior == NULL) {
+        *lista_consultas = listaAux->prox;
+    } else {
+        anterior->prox = listaAux->prox;
+    }
+
+    printf("Consulta removida\n");
+    free(listaAux);
+
+    // Remover consulta do histórico de consultas dos pacientes
+    ListaPacientes *pacienteAtual = *lista_pacientes;
+    while (pacienteAtual != NULL) {
+        Consulta *consultaAtual = pacienteAtual->paciente.historico_consultas;
+        Consulta *anteriorConsulta = NULL;
+
+        while (consultaAtual != NULL && strcmp(consultaAtual->id, id) != 0) {
+            anteriorConsulta = consultaAtual;
+            consultaAtual = consultaAtual->prox_elemento;
+        }
+
+        if (consultaAtual != NULL) {
+            if (anteriorConsulta == NULL) {
+                pacienteAtual->paciente.historico_consultas = consultaAtual->prox_elemento;
+            } else {
+                anteriorConsulta->prox_elemento = consultaAtual->prox_elemento;
+            }
+            free(consultaAtual);
+        }
+
+        pacienteAtual = pacienteAtual->prox;
+    }
 }
+
 void imprimir_consultas (ListaConsultas **lista){ 
     ListaConsultas *listaAux = *lista; 
 
