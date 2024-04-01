@@ -1,11 +1,11 @@
-
 #ifndef TRATATIVAS_H
 #define TRATATIVAS_H
 
-// Path: GerenciamentoOtica/include/tratativas.h
-#include "../include/consultas.h"
-
-void cria_lista_consultas(ListaConsultas **lista);
+#include <stdio.h>
+#include <ctype.h>
+#include <stdlib.h>
+#include <string.h>
+#include <unistd.h>
 
 int numero_inteiroc(char *str);
 

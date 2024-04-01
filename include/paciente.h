@@ -1,25 +1,22 @@
 #ifndef PACIENTE_H
 #define PACIENTE_H
 
+#include "../src/consultas.c"
+
 typedef struct paciente Paciente;
-
-typedef struct lista_pacientes ListaPacientes;
-
-void cria_lista_paciente(ListaPacientes **listap);
-
-int verifica_cpf_paciente(ListaPacientes **lista, char cpf[12]);
 
 void formata_string(char *str);
 
+Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt);
+
+Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente);
+
+Paciente novo_paciente(Paciente * lista_pacientes);
+
 void upper_string(char *str);
 
-Paciente *novo_paciente(ListaPacientes **lista);
+Paciente * encontra_paciente(Paciente * lista_pacientes, char cpf[12]);
 
-void adicionar_paciente(ListaPacientes **lista);
-
-void remover_paciente(ListaPacientes **lista, char *cpf);
-
-Paciente *buscar_paciente_por_nome(ListaPacientes *lista, char *nome_digitado);
-
+int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]);
 
 #endif
