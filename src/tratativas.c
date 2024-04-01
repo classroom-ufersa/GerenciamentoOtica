@@ -1,4 +1,8 @@
-#include "../include/tratativas.h"
+#include <stdio.h>
+#include <ctype.h>
+#include <string.h>
+#include <stdlib.h>
+#include "../include/consultas.h"
 
 int numero_inteiroc(char *str) {
     for (int i = 0; str[i] != '\0'; i++) {
