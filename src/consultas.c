@@ -3,7 +3,7 @@
 
 typedef struct consulta{
     int id;
-    char data[10];
+    char data[11];
     char preco[10];
     char descricao[100];
     Consulta *prox_elemento;
@@ -16,19 +16,20 @@ Consulta *adiciona_consulta(Consulta * lista_consultas, Consulta nova_consulta){
     nova->id = nova_consulta.id;
     strcpy(nova->preco, nova_consulta.preco);
     strcpy(nova->descricao, nova_consulta.descricao);
-    strcpy(nova->data, "nova_consulta.data");
+    strcpy(nova->data, nova_consulta.data);
     nova->prox_elemento = NULL;
     if (lista_consultas == NULL){
         return nova;
     }
     Consulta *atual = lista_consultas;
-    Consulta *anterior = lista_consultas;
+    Consulta *anterior = NULL;
     while (atual != NULL)
     {
         anterior = atual;
         atual = atual->prox_elemento;
     }
     anterior->prox_elemento = nova;
+    nova->prox_elemento = atual;
     return lista_consultas;
 }
 
@@ -37,7 +38,7 @@ Consulta nova_consulta(int *qnt){
     char data[11], preco[10], descricao[100];
     do {
         printf("Digite a data (DD/MM/AAAA): ");
-        scanf(" %10[^\n]", data);
+        scanf(" %[^\n]", data);
     } while (!data_valida(data)); 
 
     // Convertendo a data para o formato numérico
