@@ -9,6 +9,8 @@ void formata_string(char *str);
 
 Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt);
 
+Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado);
+
 Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente);
 
 Paciente novo_paciente(Paciente * lista_pacientes);
