@@ -84,3 +84,24 @@ void imprimir_consultas(Consulta *lista_consultas) {
         atual = atual->prox_elemento;
     }
 }
+
+
+Consulta *remove_consulta(Consulta * lista_consultas, int id_digitado) {
+    Consulta *ant = NULL;
+    Consulta *novo = lista_consultas;
+    while (novo != NULL && (novo->id != id_digitado)){
+        ant = novo;
+        novo = novo->prox_elemento;
+    }
+    if (novo == NULL){
+        printf("Consulta não encontrada\n");
+        return lista_consultas;
+    }
+    if (ant == NULL){
+        lista_consultas = novo->prox_elemento;
+    }
+    else
+        ant->prox_elemento = novo->prox_elemento;
+    free(novo);
+    return lista_consultas;
+}
