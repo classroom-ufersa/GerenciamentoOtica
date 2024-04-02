@@ -2,20 +2,20 @@
 
 struct paciente{
     char nome[100];
-    char cpf[15];
+    char cpf[20];
     char idade[4];
     Consulta * historico_consultas;
     Paciente * prox_elemento;
 };
 
- Paciente * encontra_paciente(Paciente * lista_pacientes, char cpf[12]){
-    Paciente * auxiliar;
-	for (auxiliar = lista_pacientes; auxiliar != NULL; auxiliar = auxiliar->prox_elemento){
-        formata_cpf(cpf);
-		if (strcmp(auxiliar->cpf, cpf) == 0)
-			return auxiliar;
-	}
-	return NULL;
+Paciente *encontra_paciente(Paciente *lista_pacientes, char cpf[20]) {
+    formata_cpf(cpf); 
+    Paciente *auxiliar;
+    for (auxiliar = lista_pacientes; auxiliar != NULL; auxiliar = auxiliar->prox_elemento) {
+        if (strcmp(auxiliar->cpf, cpf) == 0)
+            return auxiliar;
+    }
+    return NULL;
 }
 
 Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
@@ -25,8 +25,6 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
     scanf(" %[^\n]", cpf);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
-        printf("aaaaaaaaaa");
-        sleep(2);
         Paciente * aux = encontra_paciente(lista_pacientes, cpf);
         aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta_nova);
         return lista_pacientes;
@@ -37,7 +35,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
 }
 
 
-int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]){
+int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[20]){
     Paciente *listaAux = lista_pacientes; 
 
     while(listaAux != NULL){ 
@@ -77,6 +75,7 @@ Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente) {
     strcpy(novo->nome, paciente.nome);
     strcpy(novo->idade, paciente.idade);
     novo->prox_elemento = NULL;
+    novo->historico_consultas = paciente.historico_consultas;
 
     if (lista_pacientes == NULL || strcmp(lista_pacientes->nome, paciente.nome) > 0) {
         novo->prox_elemento = lista_pacientes;
@@ -102,7 +101,7 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
 
     Paciente novo;
     
-    char cpf_digitado[15], nome_digitado[100], idade_digitada[4];
+    char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
 
     do {
         printf("Digite o CPF (apenas números): ");
@@ -167,8 +166,9 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
                     printf("Descricao: %s\n", consulta_atual->descricao);
                     consulta_atual = consulta_atual->prox_elemento;
                 }
-            sleep(2);
-            } else {
+                sleep(3);
+            } 
+            else {
                 printf("Este paciente ainda não possui histórico de consultas.\n");
             }
 
@@ -180,4 +180,11 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
     if (!encontrado) {
         printf("Paciente não encontrado!\n");
     }
+}
+
+
+void carrega_dados_para_arquivo(Paciente * lista_pacientes){
+    FILE * arquivo = fopen("pacientes.txt", "r");
+
+
 }
