@@ -90,14 +90,14 @@ Consulta *remove_consulta(Consulta * lista_consultas, int id_digitado){
     Consulta *anterior = NULL;
     Consulta *novo = lista_consultas;
     while (novo != NULL && (novo->id == id_digitado)){
-        ant = novo;
+        anterior = novo;
         novo = novo->prox_elemento;
     }
     if (novo == NULL){
         printf("\nConsulta não encontrada");
         return lista_consultas;
     }
-    if (ant == NULL){
+    if (anterior == NULL){
         lista_consultas = novo->prox_elemento;
     }
     else
