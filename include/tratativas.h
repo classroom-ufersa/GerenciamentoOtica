@@ -21,4 +21,6 @@ char *formata_cpf(char *cpf);
 
 void cabecalho(char* linha, char* titulo);
 
+void pressiona_enter();
+
 #endif
