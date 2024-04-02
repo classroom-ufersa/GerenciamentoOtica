@@ -34,6 +34,21 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
     }
 }
 
+Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
+    char cpf[15];
+    printf("\nQual é o cpf do paciente que deseja retirar a consulta? ");
+    scanf(" %[^\n]", cpf);
+    formata_cpf(cpf);
+    if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
+        Paciente * aux = encontra_paciente(lista_pacientes, cpf);
+        aux->historico_consultas = remove_consulta(aux->historico_consultas, id_digitado);
+        return lista_pacientes;
+    } else {
+        printf("\nEsse paciente ainda não existe.\n");
+        return lista_pacientes;
+    }
+}
+
 
 int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[20]){
     Paciente *listaAux = lista_pacientes; 
