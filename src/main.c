@@ -72,8 +72,6 @@ void menu(Paciente *lista_para_pacientes) {
                 printf("\n Qual o ID da consulta: ");
                 scanf("%d", id_digitado);
                 lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes, id_digitado);
-                //escrever no arquivo
-            break;
             } else if (strcmp(opcao, "5") == 0) {
                 system(sistema_operacional);
             } else if (strcmp(opcao, "6") == 0) {
