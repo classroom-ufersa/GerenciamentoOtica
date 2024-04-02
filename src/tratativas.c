@@ -77,14 +77,33 @@ int data_valida(char *data) {
     sscanf(data, "%d/%d/%d", &dia, &mes, &ano);
     if (dia == 0 || mes == 0 || ano == 0)   /* verifica se a data é nula */
         return 0;
+
+    // Verifica se o ano tem 4 dígitos
+    if (ano < 1000 || ano > 9999) {
+        printf("Formato de data inválido. O ano deve ter 4 dígitos.\n");
+        return 0;
+    }
     
     // verificação do dia máximo de cada mês:
-    if (dia > 31 || mes > 12)               /* valores máximos de dia e mês */
+    if (dia > 31 || mes > 12){     /* verifica se o dia e o mês são válidos */
         return 0;
-    else if (mes == 2 && dia > 28)
+    }
+
+    //verifica se o ano é bissexto 
+    else if (mes == 2 && ((ano % 4 == 0 && ano % 100 != 0) || (ano % 400 == 0))) { 
+        if (dia > 29) {
+            printf("Formato de data inválido.\n");
+            return 0;
+        }
+    }   
+
+    else if (mes == 2 && dia > 28){
         return 0;
-    else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30)
+    }
+
+    else if ((mes == 4 || mes == 6 || mes == 9 || mes == 11) && dia > 30){
         return 0;
+    }
 
     return 1;
 }
@@ -104,3 +123,4 @@ void pressiona_enter() {
     while (getchar() != '\n');
     getchar();
 }
+
