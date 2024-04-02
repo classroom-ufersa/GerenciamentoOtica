@@ -19,10 +19,12 @@ Paciente *encontra_paciente(Paciente *lista_pacientes, char cpf[20]) {
 }
 
 Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
-    char cpf[15];
+    char cpf[20];
     Consulta consulta_nova = nova_consulta(qnt);
-    printf("\nQual é o cpf do paciente? ");
-    scanf(" %[^\n]", cpf);
+    do {
+        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        scanf(" %[^\n]", cpf);
+    } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
         Paciente * aux = encontra_paciente(lista_pacientes, cpf);
@@ -35,9 +37,11 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
 }
 
 Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
-    char cpf[15];
-    printf("\nQual é o cpf do paciente que deseja retirar a consulta? ");
-    scanf(" %[^\n]", cpf);
+    char cpf[20];
+    do {
+        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        scanf(" %[^\n]", cpf);
+    } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
         Paciente * aux = encontra_paciente(lista_pacientes, cpf);
@@ -49,6 +53,45 @@ Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_di
     }
 }
 
+
+Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
+    cabecalho("----------------", "Remover Paciente");
+    char cpf[20];
+    do {
+        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        scanf(" %[^\n]", cpf);
+    } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
+    formata_cpf(cpf);
+    if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
+        Paciente * aux = encontra_paciente(lista_pacientes, cpf);
+        lista_pacientes = remove_paciente(lista_pacientes, cpf);
+        return lista_pacientes;
+    } else {
+        printf("\nEsse paciente ainda não existe.\n");
+        return lista_pacientes;
+    }
+}
+
+Paciente * remove_paciente(Paciente * lista_pacientes, char cpf[20]){
+    Paciente *anterior = NULL;
+    Paciente *novo = lista_pacientes;
+    while (novo != NULL && strcmp(novo->cpf, cpf) != 0 ){
+        anterior = novo;
+        novo = novo->prox_elemento;
+    }
+    if (novo == NULL){
+        printf("\nPaciente não encontrado");
+        return lista_pacientes;
+    }
+    if (anterior == NULL){
+        lista_pacientes = novo->prox_elemento;
+    }
+    else{
+        anterior->prox_elemento = novo->prox_elemento;
+    }
+    free(novo);
+    return lista_pacientes;
+}
 
 int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[20]){
     Paciente *listaAux = lista_pacientes; 

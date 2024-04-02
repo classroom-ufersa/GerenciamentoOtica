@@ -11,6 +11,10 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt);
 
 Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado);
 
+Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes);
+
+Paciente * remove_paciente(Paciente * lista_pacientes, char cpf[20]);
+
 Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente);
 
 Paciente novo_paciente(Paciente * lista_pacientes);
