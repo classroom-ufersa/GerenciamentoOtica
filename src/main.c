@@ -55,11 +55,7 @@ void menu(Paciente *lista_para_pacientes) {
                 system(sistema_operacional); 
             } else if (strcmp(opcao, "2") == 0) {
                 system(sistema_operacional);
-                cabecalho("----------------", "Remover Paciente");
-                char cpf_digitado[15];
-                printf("\nDigite o cpf do paciente que deseja remover:");
-                scanf(" %[^\n]", cpf_digitado);
-                // remover_paciente(lista_para_pacientes, cpf_digitado);
+                lista_para_pacientes = remover_paciente_lista_pacientes(lista_para_pacientes);
                 pressiona_enter();
                 system(sistema_operacional);
             } else if (strcmp(opcao, "3") == 0) {
