@@ -98,3 +98,9 @@ char *formata_cpf(char *cpf) {
 void cabecalho(char* linha, char* titulo) {
     printf("%s\t%s\t%s\n", linha, titulo, linha);
 }
+
+void pressiona_enter() {
+    printf("\nPressione ENTER para continuar...");
+    while (getchar() != '\n');
+    getchar();
+}
