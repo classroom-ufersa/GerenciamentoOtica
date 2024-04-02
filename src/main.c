@@ -24,6 +24,9 @@ void menu(Paciente *lista_para_pacientes) {
     Paciente paciente_novo;
     Consulta consulta_nova;
     int qnt = 0;
+    int id_digitado;
+    char local_do_arquivo[50];
+    strcpy(local_do_arquivo, "../resources/dados.txt");
 
     while (1) {
         printf("------------------- MENU -------------------\n");
@@ -48,6 +51,7 @@ void menu(Paciente *lista_para_pacientes) {
                 sleep(1); 
                 paciente_novo = novo_paciente(lista_para_pacientes);
                 lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente_novo);
+                pressiona_enter();
                 system(sistema_operacional); 
             } else if (strcmp(opcao, "2") == 0) {
                 system(sistema_operacional);
@@ -56,18 +60,22 @@ void menu(Paciente *lista_para_pacientes) {
                 printf("\nDigite o cpf do paciente que deseja remover:");
                 scanf(" %[^\n]", cpf_digitado);
                 // remover_paciente(lista_para_pacientes, cpf_digitado);
+                pressiona_enter();
                 system(sistema_operacional);
             } else if (strcmp(opcao, "3") == 0) {
                 system(sistema_operacional);
                 lista_para_pacientes = insere_consulta(lista_para_pacientes, &qnt);
+                pressiona_enter();
                 system(sistema_operacional);
             } else if (strcmp(opcao, "4") == 0) {
                 system(sistema_operacional);
-
-                system(sistema_operacional);
+                printf("\n Qual o ID da consulta: ");
+                scanf("%d", id_digitado);
+                lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes, id_digitado);
+                //escrever no arquivo
+            break;
             } else if (strcmp(opcao, "5") == 0) {
                 system(sistema_operacional);
-                break;
             } else if (strcmp(opcao, "6") == 0) {
                 system(sistema_operacional);
                 cabecalho("----------------", "Busca Paciente");
@@ -75,12 +83,11 @@ void menu(Paciente *lista_para_pacientes) {
                 printf("\nDigite o nome do paciente que deseja buscar:");
                 scanf(" %99[^\n]", nome_paciente_digitado);
                 buscar_paciente_por_nome(lista_para_pacientes, nome_paciente_digitado);
-                sleep(1);
+                pressiona_enter();
                 system(sistema_operacional);
             } else if (strcmp(opcao, "7") == 0) {
                 system(sistema_operacional);
                 system(sistema_operacional);
-                break;
             } else if (strcmp(opcao, "8") == 0) {
                 printf("Saindo...\n"); 
                 sleep(1);
