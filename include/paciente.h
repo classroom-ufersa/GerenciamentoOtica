@@ -25,4 +25,6 @@ Paciente * encontra_paciente(Paciente * lista_pacientes, char cpf[12]);
 
 int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]);
 
+void lista_paciente(Paciente *lista_pacientes);
+
 #endif
