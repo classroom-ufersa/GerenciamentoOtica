@@ -100,8 +100,9 @@ Consulta *remove_consulta(Consulta * lista_consultas, int id_digitado){
     if (anterior == NULL){
         lista_consultas = novo->prox_elemento;
     }
-    else
+    else{
         anterior->prox_elemento = novo->prox_elemento;
+    }
     free(novo);
     return lista_consultas;
 }
