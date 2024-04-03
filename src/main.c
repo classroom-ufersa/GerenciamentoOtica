@@ -68,6 +68,9 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 system("cls");
             } else if (strcmp(opcao, "5") == 0) {
                 system("cls");
+                lista_para_pacientes = editar_paciente_lista_paciente(lista_para_pacientes);
+                pressiona_enter();
+                system("cls");
             } else if (strcmp(opcao, "6") == 0) {
                 system("cls");
                 cabecalho("----------------", "Busca Paciente");
