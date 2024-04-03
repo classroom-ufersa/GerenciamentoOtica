@@ -25,7 +25,13 @@ Paciente * encontra_paciente(Paciente * lista_pacientes, char cpf[12]);
 
 int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]);
 
+int verifica_cpf_paciente_edicao(Paciente *lista_pacientes, char cpf_editado[20], char cpf_antigo[20]);
+
 void lista_paciente(Paciente *lista_pacientes);
+
+Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes);
+
+Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]);
 
 void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo);
 
