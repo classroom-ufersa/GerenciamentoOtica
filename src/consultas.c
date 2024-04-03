@@ -85,24 +85,32 @@ void imprimir_consultas(Consulta *lista_consultas) {
     }
 }
 
-
-Consulta *remove_consulta(Consulta * lista_consultas, int id_digitado){
+Consulta *remove_consulta(Consulta *lista_consultas, int id_digitado) {
     Consulta *anterior = NULL;
     Consulta *novo = lista_consultas;
-    while (novo != NULL && (novo->id == id_digitado)){
+
+    // Procurar pelo nó com o ID desejado
+    while (novo != NULL && novo->id != id_digitado) {
         anterior = novo;
         novo = novo->prox_elemento;
     }
-    if (novo == NULL){
+
+    // Se o nó não foi encontrado
+    if (novo == NULL) {
         printf("\nConsulta não encontrada");
         return lista_consultas;
     }
-    if (anterior == NULL){
+
+    // Se o nó encontrado for o primeiro da lista
+    if (anterior == NULL) {
         lista_consultas = novo->prox_elemento;
-    }
-    else{
+    } else {
+        // Remover o nó encontrado da lista
         anterior->prox_elemento = novo->prox_elemento;
     }
+
+    // Liberar a memória do nó removido
     free(novo);
+    
     return lista_consultas;
 }

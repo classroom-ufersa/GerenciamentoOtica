@@ -39,7 +39,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
 Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
     char cpf[20];
     do {
-        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas números): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
@@ -355,12 +355,42 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
     Paciente *aux = lista_para_pacientes; 
     while (aux != NULL){ 
         fprintf(arquivo, "Paciente:\t %s\t %s\t %s\n", aux->nome, aux->cpf, aux->idade); 
-        Consulta *consultas = aux->historico_consultas;
+        Consulta *consultas = aux->historico_consultas; // Aponta para o histórico de consultas do paciente
+        fprintf(arquivo, "Histórico de consultas:\n");
+        fprintf(arquivo, "id \t data \t preco \t descricao\n");
         while (consultas != NULL){
-            fprintf(arquivo, "Consulta %s\t%d\t%s\t%s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
+            fprintf(arquivo, "%d\t %d\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
             consultas = consultas->prox_elemento;
         }
-        aux = aux->prox_elemento;
+        aux = aux->prox_elemento; 
     }
     fclose(arquivo);
+}
+
+Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes, int *qnt){
+    FILE *arquivo = fopen(local_do_arquivo, "rt"); 
+    if (arquivo == NULL){ 
+        perror("Erro ao abrir o arquivo");
+        exit(1);
+    }
+    char linha[200]; 
+    Paciente paciente; 
+    Consulta consulta;
+    while (fgets(linha, 200, arquivo) != NULL){ 
+        Paciente *aux;
+        if (strstr(linha, "Paciente") != NULL){ 
+            sscanf(linha, "Paciente:\t %s\t %s\t %s\n", paciente.nome, paciente.cpf, paciente.idade);
+            paciente.prox_elemento = NULL; 
+            paciente.historico_consultas = NULL; 
+            lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente); 
+            aux = encontra_paciente(lista_para_pacientes, paciente.cpf);
+        } 
+        else{ 
+            sscanf(linha,"%d\t %d\t %s\t %s\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
+            aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta); 
+            (*qnt)++; 
+        }
+    }
+    fclose(arquivo);
+    return lista_para_pacientes;
 }
