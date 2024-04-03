@@ -27,4 +27,6 @@ int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]);
 
 void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo);
 
+Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes, int *qnt);
+
 #endif
