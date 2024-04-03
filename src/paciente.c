@@ -39,7 +39,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
 Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
     char cpf[20];
     do {
-        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas números): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
