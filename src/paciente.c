@@ -122,6 +122,73 @@ void formata_string(char *str) {
     }
 }
 
+Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes, Paciente paciente) {
+    Paciente *novo = (Paciente *)malloc(sizeof(Paciente));
+    if (novo == NULL) {
+        perror("Erro ao alocar memoria");
+        exit(1);
+    }
+
+    strcpy(novo->cpf, paciente.cpf);
+    strcpy(novo->nome, paciente.nome);
+    strcpy(novo->idade, paciente.idade);
+    novo->prox_elemento = NULL;
+    novo->historico_consultas = paciente.historico_consultas;
+
+    if (lista_pacientes == NULL || strcmp(lista_pacientes->nome, paciente.nome) > 0) {
+        novo->prox_elemento = lista_pacientes;
+        return novo;
+    }
+
+    Paciente *anterior = NULL;
+    Paciente *atual = lista_pacientes;
+
+    while (atual != NULL && strcmp(atual->nome, paciente.nome) < 0) {
+        anterior = atual;
+        atual = atual->prox_elemento;
+    }
+
+    anterior->prox_elemento = novo;
+    novo->prox_elemento = atual;
+
+    return lista_pacientes;
+}
+
+Paciente edita_paciente(Paciente * lista_pacientes) {
+    cabecalho("--------------", "Adicionar Paciente");
+
+    Paciente novo;
+    
+    char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
+
+    do {
+        printf("Digite o CPF (apenas números): ");
+        scanf(" %[^\n]", cpf_digitado);
+    } while (verifica_cpf_paciente(lista_pacientes, cpf_digitado) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
+
+     formata_cpf(cpf_digitado); // Formata o CPF
+
+    do {
+        printf("\nDigite o nome do paciente: ");
+        scanf(" %99[^\n]", nome_digitado);
+    } while (!contem_apenas_letras(nome_digitado));
+
+    formata_string(nome_digitado);
+    
+    do {
+        printf("\nDigite a idade do paciente: ");
+        scanf(" %3[^\n]", idade_digitada);
+    } while (!numero_inteiroc(idade_digitada));
+
+    strcpy(novo.cpf, cpf_digitado);
+    strcpy(novo.nome, nome_digitado);
+    strcpy(novo.idade, idade_digitada);
+    novo.historico_consultas = NULL;
+    novo.prox_elemento = NULL;
+
+    return novo;
+}
+
 Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente) {
     Paciente *novo = (Paciente *)malloc(sizeof(Paciente));
     if (novo == NULL) {
@@ -240,6 +307,43 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
     }
 }
 
+void lista_paciente(Paciente *lista_pacientes) {
+
+    Paciente *atual = lista_pacientes;
+    int encontrado = 0;
+
+    if (atual == NULL){
+        printf("\nAinda nao foi cadastrado nenhum paciente.");
+    }
+    else{
+        cabecalho("-------------------", "Lista de Paciente");
+        while (atual != NULL) {
+        
+            printf("\nNome: %s\n", atual->nome);
+            printf("CPF: %s\n", atual->cpf);
+            printf("Idade: %s\n", atual->idade);
+
+            Consulta *consulta_atual = atual->historico_consultas;
+            if (consulta_atual != NULL) {
+                cabecalho("==================", "Historico de Consultas");
+                while (consulta_atual != NULL) {
+                    printf("Data: %s\n", consulta_atual->data);
+                    printf("ID: %d\n", consulta_atual->id);
+                    printf("Valor da consulta: R$%s\n", consulta_atual->preco);
+                    printf("Descricao: %s\n", consulta_atual->descricao);
+                    consulta_atual = consulta_atual->prox_elemento;
+                    printf("\n----------------------------------------------");
+                }
+                printf("\n----------------------------------------------");
+            } 
+            else {
+                printf("\nEste paciente ainda não possui histórico de consultas.");
+            }
+            atual = atual->prox_elemento;
+        }
+        
+    }
+}
 
 void carrega_dados_para_arquivo(Paciente * lista_pacientes){
     FILE * arquivo = fopen("pacientes.txt", "r");
