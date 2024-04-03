@@ -62,8 +62,9 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
             } else if (strcmp(opcao, "4") == 0) {
                 system("cls");
                 printf("\n Qual o ID da consulta: ");
-                scanf("%d", id_digitado);
+                scanf("%d", &id_digitado);
                 lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes, id_digitado);
+                pressiona_enter();
                 system("cls");
             } else if (strcmp(opcao, "5") == 0) {
                 system("cls");
