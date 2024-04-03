@@ -25,4 +25,6 @@ Paciente * encontra_paciente(Paciente * lista_pacientes, char cpf[12]);
 
 int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[15]);
 
+void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo);
+
 #endif

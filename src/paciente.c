@@ -241,8 +241,22 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
 }
 
 
-void carrega_dados_para_arquivo(Paciente * lista_pacientes){
-    FILE * arquivo = fopen("pacientes.txt", "r");
+void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
+    FILE *arquivo = fopen(local_do_arquivo, "wt"); 
+    if (arquivo == NULL){ 
+        perror("Erro ao abrir o arquivo");
+        exit(1);
+    }
 
-
+    Paciente *aux = lista_para_pacientes; 
+    while (aux != NULL){ 
+        fprintf(arquivo, "Paciente:\t %s\t %s\t %s\n", aux->nome, aux->cpf, aux->idade); 
+        Consulta *consultas = aux->historico_consultas;
+        while (consultas != NULL){
+            fprintf(arquivo, "Consulta %s\t%d\t%s\t%s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
+            consultas = consultas->prox_elemento;
+        }
+        aux = aux->prox_elemento;
+    }
+    fclose(arquivo);
 }
