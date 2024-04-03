@@ -23,6 +23,7 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
     Consulta consulta_nova;
     int qnt = 0;
     int id_digitado;
+    lista_para_pacientes= ler_do_arquivo(local_do_arquivo, lista_para_pacientes, &qnt);
 
     while (1) {
         printf("------------------- MENU -------------------\n");
