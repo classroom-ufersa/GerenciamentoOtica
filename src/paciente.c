@@ -365,10 +365,8 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
     while (aux != NULL){ 
         fprintf(arquivo, "Paciente:\t %s\t %s\t %s\n", aux->nome, aux->cpf, aux->idade); 
         Consulta *consultas = aux->historico_consultas; // Aponta para o histórico de consultas do paciente
-        fprintf(arquivo, "Histórico de consultas:\n");
-        fprintf(arquivo, "id \t data \t preco \t descricao\n");
         while (consultas != NULL){
-            fprintf(arquivo, "%d\t %s\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
+            fprintf(arquivo, "Consulta: %d\t %s\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
             consultas = consultas->prox_elemento;
         }
         aux = aux->prox_elemento; 
@@ -395,7 +393,7 @@ Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes,
             aux = encontra_paciente(lista_para_pacientes, paciente.cpf);
         } 
         else{ 
-            sscanf(linha,"%d\t %d\t %s\t %s\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
+            sscanf(linha,"Consulta: %d\t %s\t %s\t %s\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
             aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta); 
             (*qnt)++; 
         }
