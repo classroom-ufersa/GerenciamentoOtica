@@ -17,14 +17,12 @@ dos dados em virtude da adição ou remoção.
 #include "paciente.c"
 
 
-void menu(Paciente *lista_para_pacientes) {
+void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
     char opcao[100];
     Paciente paciente_novo;
     Consulta consulta_nova;
     int qnt = 0;
     int id_digitado;
-    char local_do_arquivo[50];
-    strcpy(local_do_arquivo, "../resources/dados.txt");
 
     while (1) {
         printf("------------------- MENU -------------------\n");
@@ -49,6 +47,7 @@ void menu(Paciente *lista_para_pacientes) {
                 sleep(1); 
                 paciente_novo = novo_paciente(lista_para_pacientes);
                 lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente_novo);
+                escreve_no_arquivo(lista_para_pacientes, local_do_arquivo);
                 pressiona_enter();
                 system("cls");
             } else if (strcmp(opcao, "2") == 0) {
@@ -98,8 +97,10 @@ void menu(Paciente *lista_para_pacientes) {
 }
 
 int main(void){
+    char local_do_arquivo[50];
+    strcpy(local_do_arquivo, "../resources/dados.txt");
     Paciente *lista_para_pacientes = NULL;
-    menu(lista_para_pacientes);
+    menu(lista_para_pacientes, local_do_arquivo);
     
     return 0;
 }
