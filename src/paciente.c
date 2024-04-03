@@ -63,7 +63,6 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
-        Paciente * aux = encontra_paciente(lista_pacientes, cpf);
         lista_pacientes = remove_paciente(lista_pacientes, cpf);
         return lista_pacientes;
     } else {
@@ -105,6 +104,25 @@ int verifica_cpf_paciente(Paciente *lista_pacientes, char cpf[20]){
     return 1;
 }
 
+int verifica_cpf_paciente_edicao(Paciente *lista_pacientes, char cpf_editado[20], char cpf_antigo[20]){
+    Paciente *listaAux = lista_pacientes; 
+    
+    if(strcmp(cpf_editado, cpf_antigo) == 0){
+        printf("\nFoi digitado o mesmo cpf, entao ele continuara o mesmo depois da edicao.");
+        return 1;
+    }
+    while(listaAux != NULL){ 
+        if(strcmp(listaAux->cpf, cpf_editado) == 0){ 
+            if(strcmp(listaAux->cpf, cpf_antigo) == 0){
+                return 1;
+            }
+            return 0;
+        }
+        listaAux = listaAux->prox_elemento; 
+    }
+    return 1;
+}
+
 void formata_string(char *str) {
     int i;
     for (i = 0; str[i] != '\0'; i++) {
@@ -122,71 +140,62 @@ void formata_string(char *str) {
     }
 }
 
-Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes, Paciente paciente) {
-    Paciente *novo = (Paciente *)malloc(sizeof(Paciente));
-    if (novo == NULL) {
-        perror("Erro ao alocar memoria");
-        exit(1);
+Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes) {
+    char cpf[20];
+    do {
+        printf("\nDigite o CPF do paciente que deseja editar(apenas números): ");
+        scanf(" %[^\n]", cpf);
+    } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
+    formata_cpf(cpf);
+    if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
+        lista_pacientes = edita_paciente(lista_pacientes, cpf);
+        return lista_pacientes;
+    } else {
+        printf("\nEsse paciente ainda não existe, cadastre-o para edita-lo.\n");
+        return lista_pacientes;
     }
-
-    strcpy(novo->cpf, paciente.cpf);
-    strcpy(novo->nome, paciente.nome);
-    strcpy(novo->idade, paciente.idade);
-    novo->prox_elemento = NULL;
-    novo->historico_consultas = paciente.historico_consultas;
-
-    if (lista_pacientes == NULL || strcmp(lista_pacientes->nome, paciente.nome) > 0) {
-        novo->prox_elemento = lista_pacientes;
-        return novo;
-    }
-
-    Paciente *anterior = NULL;
-    Paciente *atual = lista_pacientes;
-
-    while (atual != NULL && strcmp(atual->nome, paciente.nome) < 0) {
-        anterior = atual;
-        atual = atual->prox_elemento;
-    }
-
-    anterior->prox_elemento = novo;
-    novo->prox_elemento = atual;
-
-    return lista_pacientes;
 }
 
-Paciente edita_paciente(Paciente * lista_pacientes) {
-    cabecalho("--------------", "Adicionar Paciente");
+Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]) {
+    cabecalho("--------------", "Editar Paciente");
+    Paciente * copia;
+    if (copia == NULL){
+        printf("\nPaciente nao existe.");
+    }
+    else{
+        for(copia = lista_pacientes; copia != NULL; copia = copia->prox_elemento){
+            if (strcmp(copia->cpf, cpf_antigo) == 0){
+                char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
 
-    Paciente novo;
-    
-    char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
+                do {
+                    printf("Digite o CPF (apenas números): ");
+                    scanf(" %[^\n]", cpf_digitado);
+                } while (verifica_cpf_paciente_edicao(lista_pacientes, cpf_digitado, cpf_antigo) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
 
-    do {
-        printf("Digite o CPF (apenas números): ");
-        scanf(" %[^\n]", cpf_digitado);
-    } while (verifica_cpf_paciente(lista_pacientes, cpf_digitado) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
+                formata_cpf(cpf_digitado); // Formata o CPF
 
-     formata_cpf(cpf_digitado); // Formata o CPF
+                do {
+                    printf("\nDigite o nome do paciente: ");
+                    scanf(" %99[^\n]", nome_digitado);
+                } while (!contem_apenas_letras(nome_digitado));
 
-    do {
-        printf("\nDigite o nome do paciente: ");
-        scanf(" %99[^\n]", nome_digitado);
-    } while (!contem_apenas_letras(nome_digitado));
+                formata_string(nome_digitado);
+                
+                do {
+                    printf("\nDigite a idade do paciente: ");
+                    scanf(" %3[^\n]", idade_digitada);
+                } while (!numero_inteiroc(idade_digitada));
 
-    formata_string(nome_digitado);
-    
-    do {
-        printf("\nDigite a idade do paciente: ");
-        scanf(" %3[^\n]", idade_digitada);
-    } while (!numero_inteiroc(idade_digitada));
+                strcpy(copia->cpf, cpf_digitado);
+                strcpy(copia->nome, nome_digitado);
+                strcpy(copia->idade, idade_digitada);
+                return lista_pacientes;
+            }
+        }
+        printf("\nEsse paciente nao existe, entao nao sera possivel edita-lo");
 
-    strcpy(novo.cpf, cpf_digitado);
-    strcpy(novo.nome, nome_digitado);
-    strcpy(novo.idade, idade_digitada);
-    novo.historico_consultas = NULL;
-    novo.prox_elemento = NULL;
-
-    return novo;
+    }
+    return lista_pacientes;
 }
 
 Paciente *adiciona_paciente(Paciente *lista_pacientes, Paciente paciente) {
