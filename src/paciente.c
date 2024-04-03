@@ -74,8 +74,8 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
 Paciente * remove_paciente(Paciente * lista_pacientes, char cpf[20]){
     Paciente *anterior = NULL;
     Paciente *novo = lista_pacientes;
-    while (novo != NULL && strcmp(novo->cpf, cpf) != 0 ){
-        anterior = novo;
+    while (novo != NULL && strcmp(novo->cpf, cpf) == 0 ){ 
+        anterior = novo; //
         novo = novo->prox_elemento;
     }
     if (novo == NULL){
