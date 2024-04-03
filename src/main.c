@@ -19,8 +19,6 @@ dos dados em virtude da adição ou remoção.
 
 void menu(Paciente *lista_para_pacientes) {
     char opcao[100];
-    char sistema_operacional[10];
-    strcpy(sistema_operacional, "cls");
     Paciente paciente_novo;
     Consulta consulta_nova;
     int qnt = 0;
@@ -47,54 +45,56 @@ void menu(Paciente *lista_para_pacientes) {
             }while(!numero_inteiroc(opcao));
 
             if (strcmp(opcao, "1") == 0) {
-                system(sistema_operacional);
+                system("cls");
                 sleep(1); 
                 paciente_novo = novo_paciente(lista_para_pacientes);
                 lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente_novo);
                 pressiona_enter();
-                system(sistema_operacional); 
+                system("cls");
             } else if (strcmp(opcao, "2") == 0) {
-                system(sistema_operacional);
+                system("cls");
                 lista_para_pacientes = remover_paciente_lista_pacientes(lista_para_pacientes);
                 pressiona_enter();
-                system(sistema_operacional);
+                system("cls");
             } else if (strcmp(opcao, "3") == 0) {
-                system(sistema_operacional);
+                system("cls");
                 lista_para_pacientes = insere_consulta(lista_para_pacientes, &qnt);
                 pressiona_enter();
-                system(sistema_operacional);
+                system("cls");
             } else if (strcmp(opcao, "4") == 0) {
-                system(sistema_operacional);
+                system("cls");
                 printf("\n Qual o ID da consulta: ");
                 scanf("%d", id_digitado);
                 lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes, id_digitado);
+                system("cls");
             } else if (strcmp(opcao, "5") == 0) {
-                system(sistema_operacional);
+                system("cls");
             } else if (strcmp(opcao, "6") == 0) {
-                system(sistema_operacional);
+                system("cls");
                 cabecalho("----------------", "Busca Paciente");
                 char nome_paciente_digitado[100];
                 printf("\nDigite o nome do paciente que deseja buscar:");
                 scanf(" %99[^\n]", nome_paciente_digitado);
                 buscar_paciente_por_nome(lista_para_pacientes, nome_paciente_digitado);
                 pressiona_enter();
-                system(sistema_operacional);
+                system("cls");
             } else if (strcmp(opcao, "7") == 0) {
-                system(sistema_operacional);
-                system(sistema_operacional);
+                system("cls");
+                lista_paciente(lista_para_pacientes);
+                pressiona_enter();
+                system("cls");
             } else if (strcmp(opcao, "8") == 0) {
+                system("cls");
                 printf("Saindo...\n"); 
                 sleep(1);
-                system(sistema_operacional);
+                system("cls");
                 break;
             } else {
                 printf("Opcao invalida!\n");
                 sleep(1);
-                system(sistema_operacional);
+                system("cls");
             }
     }
-
-
 }
 
 int main(void){
