@@ -49,7 +49,6 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 sleep(1); 
                 paciente_novo = novo_paciente(lista_para_pacientes);
                 lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente_novo);
-                escreve_no_arquivo(lista_para_pacientes, local_do_arquivo);
                 pressiona_enter();
                 system(sistema_operacional); 
             } else if (strcmp(opcao, "2") == 0) {
@@ -82,6 +81,7 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 system(sistema_operacional);
                 system(sistema_operacional);
             } else if (strcmp(opcao, "8") == 0) {
+                escreve_no_arquivo(lista_para_pacientes, local_do_arquivo);
                 printf("Saindo...\n"); 
                 sleep(1);
                 system(sistema_operacional);
