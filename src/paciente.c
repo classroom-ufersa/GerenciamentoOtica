@@ -368,7 +368,7 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
         fprintf(arquivo, "Histórico de consultas:\n");
         fprintf(arquivo, "id \t data \t preco \t descricao\n");
         while (consultas != NULL){
-            fprintf(arquivo, "%d\t %d\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
+            fprintf(arquivo, "%d\t %s\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
             consultas = consultas->prox_elemento;
         }
         aux = aux->prox_elemento; 
