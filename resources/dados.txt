@@ -1,2 +1,2 @@
-Paciente:	BIA ALMEIDA	12345678999	19
+Paciente:	Bia Almeida	12345678999	19
 Paciente:	Dalton Campos	98076899654	24
