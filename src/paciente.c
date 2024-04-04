@@ -281,11 +281,12 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
             else {
                 printf("Este paciente ainda nao possui historico de consultas.\n");
             }
-
             encontrado = 1;
         }
+        formata_string(nome_paciente);
         atual = atual->prox_elemento;
     }
+    formata_string(nome);
 
     if (!encontrado) {
         printf("Paciente nao encontrado!\n");
