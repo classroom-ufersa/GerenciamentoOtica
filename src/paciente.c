@@ -339,10 +339,10 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
 
     Paciente *aux = lista_para_pacientes; 
     while (aux != NULL){ 
-        fprintf(arquivo, "Paciente:\t %s\t %s\t %s\n", aux->nome, aux->cpf, aux->idade); 
+        fprintf(arquivo, "Paciente:\t%s\t%s\t%s\n", aux->nome, aux->cpf, aux->idade); 
         Consulta *consultas = aux->historico_consultas; // Aponta para o histórico de consultas do paciente
         while (consultas != NULL){
-            fprintf(arquivo, "Consulta: %d\t %s\t %s\t %s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
+            fprintf(arquivo, "Consulta: %d\t%s\t%s\t%s\n", consultas->id, consultas->data, consultas->preco, consultas->descricao);
             consultas = consultas->prox_elemento;
         }
         aux = aux->prox_elemento; 
@@ -362,14 +362,14 @@ Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes,
     while (fgets(linha, 200, arquivo) != NULL){ 
         Paciente *aux;
         if (strstr(linha, "Paciente") != NULL){ 
-            sscanf(linha, "Paciente:\t %s\t %s\t %s\n", paciente.nome, paciente.cpf, paciente.idade);
+            sscanf(linha, "Paciente:\t%[^\t\n]\t%[^\t\n]\t%[^\t\n]\n", paciente.nome, paciente.cpf, paciente.idade);
             paciente.prox_elemento = NULL; 
             paciente.historico_consultas = NULL; 
             lista_para_pacientes = adiciona_paciente(lista_para_pacientes, paciente); 
             aux = encontra_paciente(lista_para_pacientes, paciente.cpf);
         } 
         else{ 
-            sscanf(linha,"Consulta: %d\t %s\t %s\t %s\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
+            sscanf(linha,"Consulta: %d\t%[^\t\n]\t%[^\t\n]\t%[^\t\n]\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
             aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta); 
             (*qnt) = consulta.id - 99;
         }
