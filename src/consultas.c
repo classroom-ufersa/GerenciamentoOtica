@@ -41,9 +41,6 @@ Consulta nova_consulta(int *qnt){
         scanf(" %[^\n]", data);
     } while (!data_valida(data)); 
 
-    // Convertendo a data para o formato numérico
-    long long data_numerica = data_para_num(data);
-
     do {
         printf("Digite o preço: ");
         scanf(" %[^\n]", preco);
@@ -55,7 +52,7 @@ Consulta nova_consulta(int *qnt){
     } while (contem_apenas_letras(descricao) == 0);
     
     // Copiando os dados fornecidos para a estrutura de consulta do novo elemento
-    strcpy(consulta.data, num_para_data(data_numerica)); // Converte a data numérica para formato de string
+    strcpy(consulta.data, data); // Converte a data numérica para formato de string
     strcpy(consulta.preco, preco);
     strcpy(consulta.descricao, descricao);
     consulta.id = (*qnt) + 100;
