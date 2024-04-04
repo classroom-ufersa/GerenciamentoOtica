@@ -121,24 +121,7 @@ int verifica_cpf_paciente_edicao(Paciente *lista_pacientes, char cpf_editado[20]
         listaAux = listaAux->prox_elemento; 
     }
     return 1;
-}
-
-void formata_string(char *str) {
-    int i;
-    for (i = 0; str[i] != '\0'; i++) {
-        if (i==0){
-            str[0] = toupper(str[0]);
-        }
-        else{
-            if (str[i - 1] == ' ') {
-                str[i] = toupper(str[i]);
-            } 
-            else {
-                str[i] = tolower(str[i]);
-            }
-        }
-    }
-}
+} 
 
 Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes) {
     char cpf[20];
@@ -263,14 +246,6 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
     novo.prox_elemento = NULL;
 
     return novo;
-}
-
-
-void upper_string(char *str) {
-    int i;
-    for (i = 0; str[i] != '\0'; i++) {
-        str[i] = toupper(str[i]);
-    }
 }
 
 void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
