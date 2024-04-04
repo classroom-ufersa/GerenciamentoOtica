@@ -370,7 +370,7 @@ Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes,
         else{ 
             sscanf(linha,"Consulta: %d\t %s\t %s\t %s\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
             aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta); 
-            (*qnt)++; 
+            (*qnt) = consulta.id - 99;
         }
     }
     fclose(arquivo);
