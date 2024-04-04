@@ -17,6 +17,16 @@
  */
 int numero_inteiroc(char *str);
 
+/**
+ * @brief Verifica se uma string contém apenas dígitos ou um único ponto ou vírgula como separador decimal.
+ * 
+ * Esta função verifica se todos os caracteres da string são dígitos (0-9) ou se a string contém apenas um ponto (.) ou vírgula (,) como separador decimal.
+ * 
+ * @param[in] str A string a ser verificada.
+ * @return Retorna 1 se a string contém apenas dígitos ou um único ponto ou vírgula como separador decimal e 0 caso contrário.
+ */
+int numero_decimal(char *str);
+
 
 /**
  * @brief Verifica se uma string contém apenas letras (alfabéticas).
