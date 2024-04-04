@@ -22,7 +22,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
     char cpf[20];
     Consulta consulta_nova = nova_consulta(qnt);
     do {
-        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas numeros): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
@@ -39,7 +39,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
 Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
     char cpf[20];
     do {
-        printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas numeros): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
@@ -58,7 +58,7 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
     cabecalho("----------------", "Remover Paciente");
     char cpf[20];
     do {
-        printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja remover (apenas numeros): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
@@ -126,7 +126,7 @@ int verifica_cpf_paciente_edicao(Paciente *lista_pacientes, char cpf_editado[20]
 Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes) {
     char cpf[20];
     do {
-        printf("\nDigite o CPF do paciente que deseja editar(apenas números): ");
+        printf("\nDigite o CPF do paciente que deseja editar(apenas numeros): ");
         scanf(" %[^\n]", cpf);
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
@@ -151,7 +151,7 @@ Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]) {
                 char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
 
                 do {
-                    printf("Digite o CPF (apenas números): ");
+                    printf("Digite o CPF (apenas numeros): ");
                     scanf(" %[^\n]", cpf_digitado);
                 } while (verifica_cpf_paciente_edicao(lista_pacientes, cpf_digitado, cpf_antigo) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
 
@@ -221,7 +221,7 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
     char cpf_digitado[20], nome_digitado[100], idade_digitada[4];
 
     do {
-        printf("Digite o CPF (apenas números): ");
+        printf("Digite o CPF (apenas numeros): ");
         scanf(" %[^\n]", cpf_digitado);
     } while (verifica_cpf_paciente(lista_pacientes, cpf_digitado) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
 
@@ -278,7 +278,7 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
                 sleep(3);
             } 
             else {
-                printf("Este paciente ainda não possui histórico de consultas.\n");
+                printf("Este paciente ainda não possui historico de consultas.\n");
             }
 
             encontrado = 1;
@@ -321,7 +321,7 @@ void lista_paciente(Paciente *lista_pacientes) {
                 }
             } 
             else {
-                printf("\nEste paciente ainda não possui histórico de consultas.");
+                printf("\nEste paciente ainda não possui historico de consultas.");
                 printf("\n--------------------------------------------------------\n");
             }
             atual = atual->prox_elemento;
@@ -352,7 +352,7 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
 
 Paciente lista_vazia(Paciente *lista_pacientes){
     if (lista_pacientes == NULL){
-        printf("\nAinda nao foi cadastrado nenhum paciente.");
+        // printf("\nAinda nao foi cadastrado nenhum paciente.\n");
     }
     else{
         lista_paciente(lista_pacientes);
