@@ -192,6 +192,16 @@ void lista_paciente(Paciente *lista_pacientes);
  */
 void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo);
 
+/**
+ * @brief Verifica se a lista de pacientes está vazia e, se não estiver, exibe a lista.
+ * 
+ * Esta função verifica se a lista de pacientes está vazia. Se estiver vazia, imprime uma mensagem informando que nenhum paciente foi cadastrado.
+ * Se a lista não estiver vazia, exibe a lista de pacientes.
+ * 
+ * @param[in] lista_pacientes A lista de pacientes a ser verificada e, possivelmente, exibida.
+ * @return Retorna a lista de pacientes se ela não estiver vazia.
+ */
+Paciente lista_vazia(Paciente *lista_pacientes);
 
 /**
  * @brief Lê os dados dos pacientes e suas consultas de um arquivo de texto e os carrega na lista de pacientes.
