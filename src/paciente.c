@@ -31,7 +31,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
         aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta_nova);
         return lista_pacientes;
     } else {
-        printf("\nEsse paciente ainda não existe, cadastre-o para adicionar sua consulta.\n");
+        printf("\nEsse paciente ainda nao existe, cadastre-o para adicionar sua consulta.\n");
         return lista_pacientes;
     }
 }
@@ -48,7 +48,7 @@ Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_di
         aux->historico_consultas = remove_consulta(aux->historico_consultas, id_digitado);
         return lista_pacientes;
     } else {
-        printf("\nEsse paciente ainda não existe.\n");
+        printf("\nEsse paciente ainda nao existe.\n");
         return lista_pacientes;
     }
 }
@@ -66,7 +66,7 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
         lista_pacientes = remove_paciente(lista_pacientes, cpf);
         return lista_pacientes;
     } else {
-        printf("\nEsse paciente ainda não existe.\n");
+        printf("\nEsse paciente ainda nao existe.\n");
         return lista_pacientes;
     }
 }
@@ -79,7 +79,7 @@ Paciente * remove_paciente(Paciente * lista_pacientes, char cpf[20]){
         novo = novo->prox_elemento;
     }
     if (novo == NULL){
-        printf("\nPaciente não encontrado");
+        printf("\nPaciente nao encontrado");
         return lista_pacientes;
     }
     if (anterior == NULL){
@@ -134,7 +134,7 @@ Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes) {
         lista_pacientes = edita_paciente(lista_pacientes, cpf);
         return lista_pacientes;
     } else {
-        printf("\nEsse paciente ainda não existe, cadastre-o para edita-lo.\n");
+        printf("\nEsse paciente ainda nao existe, cadastre-o para edita-lo.\n");
         return lista_pacientes;
     }
 }
@@ -260,6 +260,7 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
 
         if (strstr(nome_paciente, nome) != NULL) {
             printf("Paciente encontrado:\n");
+            formata_string(nome);
             formata_string(nome_paciente);
             printf("Nome: %s\n", atual->nome);
             printf("CPF: %s\n", atual->cpf);
@@ -278,7 +279,7 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
                 sleep(3);
             } 
             else {
-                printf("Este paciente ainda não possui historico de consultas.\n");
+                printf("Este paciente ainda nao possui historico de consultas.\n");
             }
 
             encontrado = 1;
@@ -287,7 +288,7 @@ void buscar_paciente_por_nome(Paciente *lista_pacientes, char *nome) {
     }
 
     if (!encontrado) {
-        printf("Paciente não encontrado!\n");
+        printf("Paciente nao encontrado!\n");
     }
 }
 
@@ -321,7 +322,7 @@ void lista_paciente(Paciente *lista_pacientes) {
                 }
             } 
             else {
-                printf("\nEste paciente ainda não possui historico de consultas.");
+                printf("\nEste paciente ainda nao possui historico de consultas.");
                 printf("\n--------------------------------------------------------\n");
             }
             atual = atual->prox_elemento;

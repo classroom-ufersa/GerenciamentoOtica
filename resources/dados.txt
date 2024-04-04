@@ -1,4 +1,3 @@
-Paciente:	Alan Almeida	13944824423	23
-Consulta: 100	12/12/2024	240,25	eu quero cafe
-Paciente:	Bia Almeida	12345678999	19
-Paciente:	Hillary Diniz Saldanha	10460770403	19
+Paciente:	BIA ALMEIDA	12345678999	19
+Paciente:	Dalton Campos	98076899654	24
+Paciente:	HILLARY DINIZ SALDANHA	10460770403	19
