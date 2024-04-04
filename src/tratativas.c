@@ -9,10 +9,28 @@ int numero_inteiroc(char *str) {
     return 1;
 }
 
+int numero_decimal(char *str) {
+    int ponto_ou_virgula = 0; 
+    for (int i = 0; str[i] != '\0'; i++) {
+        if (!isdigit(str[i])) {
+            if (str[i] == '.' || str[i] == ',') {
+                ponto_ou_virgula++;
+                if (ponto_ou_virgula > 1){
+                    return 0;
+                }
+            } 
+            else {
+                return 0;
+            }
+        }
+    }
+    return 1;
+}
+
 int contem_apenas_letras(char *str) {
     for (int index = 0; str[index] != '\0'; index++) {
         if (!isalpha(str[index]) && str[index] != ' ') {
-            printf("\nA string deve conter apenas letras.");
+            printf("\nEsse campo deve conter apenas letras.\n");
             return 0;
         }
     }
