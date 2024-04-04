@@ -44,15 +44,14 @@ Consulta nova_consulta(int *qnt){
     do {
         printf("Digite o preço: ");
         scanf(" %[^\n]", preco);
-    } while (numero_inteiroc(preco) == 0);
+    } while (numero_decimal(preco) == 0);
     
     do {
         printf("Digite a descrição: ");
         scanf(" %[^\n]", descricao);
     } while (contem_apenas_letras(descricao) == 0);
     
-    // Copiando os dados fornecidos para a estrutura de consulta do novo elemento
-    strcpy(consulta.data, data); // Converte a data numérica para formato de string
+    strcpy(consulta.data, data);
     strcpy(consulta.preco, preco);
     strcpy(consulta.descricao, descricao);
     consulta.id = (*qnt) + 100;
@@ -86,28 +85,23 @@ Consulta *remove_consulta(Consulta *lista_consultas, int id_digitado) {
     Consulta *anterior = NULL;
     Consulta *novo = lista_consultas;
 
-    // Procurar pelo nó com o ID desejado
     while (novo != NULL && novo->id != id_digitado) {
         anterior = novo;
         novo = novo->prox_elemento;
     }
 
-    // Se o nó não foi encontrado
     if (novo == NULL) {
         printf("\nConsulta não encontrada");
         return lista_consultas;
     }
 
-    // Se o nó encontrado for o primeiro da lista
     if (anterior == NULL) {
         lista_consultas = novo->prox_elemento;
-    } else {
-        // Remover o nó encontrado da lista
+    } 
+    else {
         anterior->prox_elemento = novo->prox_elemento;
     }
 
-    // Liberar a memória do nó removido
-    free(novo);
-    
+    free(novo);    
     return lista_consultas;
 }
