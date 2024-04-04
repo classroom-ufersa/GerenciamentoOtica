@@ -30,29 +30,6 @@ int contem_apenas_letras(char *str);
 
 
 /**
- * @brief Converte uma data no formato DD/MM/AAAA para o formato numérico de dias desde uma data base.
- * 
- * Esta função converte uma data no formato de string DD/MM/AAAA para o formato numérico de dias desde uma data base.
- * 
- * @param[in] data A string contendo a data no formato DD/MM/AAAA.
- * @return Retorna o número de dias desde uma data base até a data fornecida.
- */
-long long data_para_num(char *data);
-
-
-/**
- * @brief Converte um número de dias desde uma data base para o formato de data DD/MM/AAAA.
- * 
- * Esta função converte um número de dias desde uma data base para o formato de data DD/MM/AAAA.
- * 
- * @param[in] data O número de dias desde uma data base.
- * @return Retorna uma string contendo a data no formato DD/MM/AAAA.
- * @warning A string retornada é alocada dinamicamente e deve ser liberada pelo usuário após o uso.
- */
-char *num_para_data(long long data);
-
-
-/**
  * @brief Verifica se uma data é válida.
  * 
  * Esta função verifica se uma data fornecida está em um formato válido e representa uma data válida do calendário.
