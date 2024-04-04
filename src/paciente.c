@@ -74,7 +74,7 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
 Paciente * remove_paciente(Paciente * lista_pacientes, char cpf[20]){
     Paciente *anterior = NULL;
     Paciente *novo = lista_pacientes;
-    while (novo != NULL && strcmp(novo->cpf, cpf) == 0 ){ 
+    while (novo != NULL && strcmp(novo->cpf, cpf) != 0 ){ 
         anterior = novo; //
         novo = novo->prox_elemento;
     }
@@ -300,8 +300,9 @@ void lista_paciente(Paciente *lista_pacientes) {
         printf("\nAinda nao foi cadastrado nenhum paciente.");
     }
     else{
-        cabecalho("-------------------", "Lista de Paciente");
+        cabecalho("====================", "Lista de Paciente");
         while (atual != NULL) {
+            cabecalho("====================", "Paciente");
         
             printf("\nNome: %s\n", atual->nome);
             printf("CPF: %s\n", atual->cpf);
@@ -309,19 +310,19 @@ void lista_paciente(Paciente *lista_pacientes) {
 
             Consulta *consulta_atual = atual->historico_consultas;
             if (consulta_atual != NULL) {
-                cabecalho("==================", "Historico de Consultas");
+                cabecalho("--------------------", "Historico de Consultas");
                 while (consulta_atual != NULL) {
-                    printf("Data: %s\n", consulta_atual->data);
+                    printf("\nData: %s\n", consulta_atual->data);
                     printf("ID: %d\n", consulta_atual->id);
                     printf("Valor da consulta: R$%s\n", consulta_atual->preco);
                     printf("Descricao: %s\n", consulta_atual->descricao);
                     consulta_atual = consulta_atual->prox_elemento;
-                    printf("\n----------------------------------------------");
+                    printf("\n------------------------------------------------------\n");
                 }
-                printf("\n----------------------------------------------");
             } 
             else {
                 printf("\nEste paciente ainda não possui histórico de consultas.");
+                printf("\n--------------------------------------------------------\n");
             }
             atual = atual->prox_elemento;
         }
