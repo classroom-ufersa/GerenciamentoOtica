@@ -213,7 +213,16 @@ void lista_paciente(Paciente *lista_pacientes);
 
 ```c
 void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo);
+
 ```
+### Função lista_vazia
+
+- **Descrição:** Esta função verifica se a lista de pacientes está vazia. 
+
+```c
+Paciente lista_vazia(Paciente *lista_pacientes);
+```
+
 ### Função ler_do_arquivo
 
 - **Descrição:** Esta função abre um arquivo de texto especificado, lê as informações dos pacientes e suas consultas e os carrega na lista de pacientes fornecida. Ela retorna a lista de pacientes atualizada.
@@ -236,20 +245,6 @@ int numero_inteiroc(char *str);
 - **Descrição:** Esta função verifica se todos os caracteres da string são letras (alfabéticas) ou espaços em branco.
 ```c
 int contem_apenas_letras(char *str);
-```
-
-### Função data_para_num
-
-- **Descrição:** Esta função converte uma data no formato de string DD/MM/AAAA para o formato numérico de dias desde uma data base.
-```c
-long long data_para_num(char *data);
-```
-
-### Função num_para_data
-
-- **Descrição:** Esta função converte um número de dias desde uma data base para o formato de data DD/MM/AAAA.
-```c
-char *num_para_data(long long data);
 ```
 
 ### Função data_valida
