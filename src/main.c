@@ -97,6 +97,7 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 sleep(1);
                 system("cls");
             }
+        system("cls");
     }
 }
 
