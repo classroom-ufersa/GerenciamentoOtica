@@ -350,12 +350,22 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
     fclose(arquivo);
 }
 
+Paciente lista_vazia(Paciente *lista_pacientes){
+    if (lista_pacientes == NULL){
+        printf("\nAinda nao foi cadastrado nenhum paciente.");
+    }
+    else{
+        lista_paciente(lista_pacientes);
+    }
+}
+
 Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes, int *qnt){
     FILE *arquivo = fopen(local_do_arquivo, "rt"); 
     if (arquivo == NULL){ 
         perror("Erro ao abrir o arquivo");
         exit(1);
     }
+    lista_vazia(lista_para_pacientes);
     char linha[200]; 
     Paciente paciente; 
     Consulta consulta;
