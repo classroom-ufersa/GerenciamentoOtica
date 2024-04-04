@@ -124,3 +124,29 @@ void pressiona_enter() {
     getchar();
 }
 
+void formata_string(char *str) {
+    int i;
+    for (i = 0; str[i] != '\0'; i++) {
+        if (i==0){
+            str[0] = toupper(str[0]);
+        }
+        else{
+            if (str[i - 1] == ' ') {
+                str[i] = toupper(str[i]);
+            } 
+            else {
+                str[i] = tolower(str[i]);
+            }
+        }
+    }
+}
+
+
+void upper_string(char *str) {
+    int i;
+    for (i = 0; str[i] != '\0'; i++) {
+        str[i] = toupper(str[i]);
+    }
+}
+
+
