@@ -40,6 +40,19 @@ int contem_apenas_letras(char *str) {
 int data_valida(char *data) {
     int dia, mes, ano;
     sscanf(data, "%d/%d/%d", &dia, &mes, &ano);
+
+    time_t agora;
+    struct tm *data_atual;
+    agora = time(NULL);
+    data_atual = localtime(&agora);
+
+    // Verificar se a data fornecida é posterior à data atual
+    if (ano < (data_atual->tm_year + 1900) ||
+        (ano == (data_atual->tm_year + 1900) && mes < (data_atual->tm_mon + 1)) ||
+        (ano == (data_atual->tm_year + 1900) && mes == (data_atual->tm_mon + 1) && dia <= data_atual->tm_mday)) {
+        printf("A data fornecida é anterior à data atual.\n");
+        return 0;
+    }
     
     if (dia == 0 || mes == 0 || ano == 0) {  /* verifica se a data é nula */
         return 0;

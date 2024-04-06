@@ -369,6 +369,8 @@ Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes,
     char linha[200]; 
     Paciente paciente; 
     Consulta consulta;
+    int maior_id = 0; // Variável para armazenar o maior ID encontrado
+    
     while (fgets(linha, 200, arquivo) != NULL){ 
         Paciente *aux;
         if (strstr(linha, "Paciente") != NULL){ 
@@ -381,9 +383,14 @@ Paciente *ler_do_arquivo(char *local_do_arquivo, Paciente *lista_para_pacientes,
         else{ 
             sscanf(linha,"Consulta: %d\t%[^\t\n]\t%[^\t\n]\t%[^\t\n]\n", &consulta.id, consulta.data, consulta.preco, consulta.descricao);
             aux->historico_consultas = adiciona_consulta(aux->historico_consultas, consulta); 
-            (*qnt) = consulta.id - 99;
+            // Verifica se o ID atual é maior que o armazenado em 'maior_id'
+            if (consulta.id > maior_id) {
+                maior_id = consulta.id;
+            }
         }
     }
     fclose(arquivo);
+    // Armazena o maior ID encontrado na variável qnt
+    *qnt = maior_id - 99;
     return lista_para_pacientes;
 }
