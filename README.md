@@ -293,6 +293,16 @@ void upper_string(char *str);
 ```
 
 ## **9-Funções em main**
+### Função menu
+- **Descrição:** Esta função apresenta um menu interativo para o usuário, permitindo-lhe executar várias operações relacionadas à manipulação de uma lista de pacientes e consultas. As operações incluem adicionar,remover, editar, buscar e listar pacientes e consultas.
+```c
+void menu(Paciente *lista_para_pacientes, char *local_do_arquivo);
+```
+### Função int main
+- **Descrição:**  inicializa o local do arquivo onde os dados serão armazenados e a lista de pacientes como vazia. Em seguida, chama a função menu para iniciar a interação com o usuário e manipular os dados dos pacientes e consultas de acordo com as opções do menu
+```c
+void menu(Paciente *lista_para_pacientes, char *local_do_arquivo);
+```
 
 ## **10-Pré-Requisitos:**
 Certifique-se de que você possui um compilador C instalado. Recomendamos o uso do [GCC](https://gcc.gnu.org/) para compilar o código.
