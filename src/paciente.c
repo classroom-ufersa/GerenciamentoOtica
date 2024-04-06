@@ -354,7 +354,6 @@ void escreve_no_arquivo(Paciente *lista_para_pacientes, char *local_do_arquivo){
 
 Paciente lista_vazia(Paciente *lista_pacientes){
     if (lista_pacientes == NULL){
-        // printf("\nAinda nao foi cadastrado nenhum paciente.\n");
     }
     else{
         lista_paciente(lista_pacientes);
