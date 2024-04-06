@@ -301,4 +301,12 @@ Certifique-se de que você possui um compilador C instalado. Recomendamos o uso 
 
 ## *11- Execução do projeto:*
 ### 11.1 Compilação do código:
+Para compilar o código, certifique-se que está no caminho correto para a pasta scr e digite o seguinte comando no terminal: 
+```
+gcc -o main main.c 
+```
 ### 11.2 Execução do código:
+Em seguida, para executar, digite: 
+```
+./main
+```
