@@ -60,7 +60,7 @@ int data_valida(char *data) {
 
     // Verifica se o ano tem 4 dígitos
     if (ano < 1000 || ano > 9999) {
-        printf("Formato de data inválido. O ano deve ter 4 dígitos.\n");
+        printf("Formato de data inválido. O ano deve ter 4 digitos.\n");
         return 0;
     }
     

@@ -42,12 +42,12 @@ Consulta nova_consulta(int *qnt){
     } while (!data_valida(data)); 
 
     do {
-        printf("Digite o preço: ");
+        printf("Digite o preco: ");
         scanf(" %[^\n]", preco);
     } while (numero_decimal(preco) == 0);
     
     do {
-        printf("Digite a descrição: ");
+        printf("Digite a descricao: ");
         scanf(" %[^\n]", descricao);
     } while (contem_apenas_letras(descricao) == 0);
     
@@ -64,12 +64,12 @@ void imprimir_consultas(Consulta *lista_consultas) {
     Consulta *atual = lista_consultas;
 
     if (atual == NULL) {
-        printf("Não há consultas para imprimir.\n");
+        printf("Nao ha consultas para imprimir.\n");
         return;
     }
 
     printf("Lista de consultas:\n");
-    printf("ID\tData\t\tPreço\tDescrição\n");
+    printf("ID\tData\t\tPreco\tDescricao\n");
 
     while (atual != NULL) {
         printf("%d\t%s\t%s\t%s\n", 
@@ -91,7 +91,7 @@ Consulta *remove_consulta(Consulta *lista_consultas, int id_digitado) {
     }
 
     if (novo == NULL) {
-        printf("\nConsulta não encontrada");
+        printf("\nConsulta nao encontrada");
         return lista_consultas;
     }
 
