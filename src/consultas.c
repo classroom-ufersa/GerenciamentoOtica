@@ -39,16 +39,19 @@ Consulta nova_consulta(int *qnt){
     do {
         printf("Digite a data (DD/MM/AAAA): ");
         scanf(" %[^\n]", data);
+        getchar();
     } while (!data_valida(data)); 
 
     do {
         printf("Digite o preco: ");
-        scanf(" %[^\n]", preco);
+        scanf(" %9[^\n]", preco);
+        getchar();
     } while (numero_decimal(preco) == 0);
     
     do {
         printf("Digite a descricao: ");
-        scanf(" %[^\n]", descricao);
+        scanf(" %99[^\n]", descricao);
+        getchar();
     } while (contem_apenas_letras(descricao) == 0);
     
     strcpy(consulta.data, data);
@@ -64,8 +67,7 @@ void imprimir_consultas(Consulta *lista_consultas) {
     Consulta *atual = lista_consultas;
 
     if (atual == NULL) {
-        printf("Nao ha consultas para imprimir.\n");
-        return;
+        printf("\nNao há consultas para imprimir.\n");
     }
 
     printf("Lista de consultas:\n");

@@ -45,10 +45,9 @@ Paciente *insere_consulta(Paciente *lista_pacientes, int *qnt);
  * Caso contrário, uma mensagem indicando que o paciente não existe é exibida.
  * 
  * @param[in] lista_pacientes Ponteiro para o início da lista de pacientes.
- * @param[in] id_digitado O ID da consulta a ser removida.
  * @return O ponteiro para a lista de pacientes atualizada após a remoção da consulta, ou NULL se o paciente não existir.
  */
-Paciente *remover_consulta_lista_pacientes(Paciente *lista_pacientes, int id_digitado);
+Paciente *remover_consulta_lista_pacientes(Paciente *lista_pacientes);
 
 
 /**

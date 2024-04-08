@@ -24,6 +24,7 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
     do {
         printf("\nDigite o CPF do paciente que deseja adicionar a consulta(apenas numeros): ");
         scanf(" %[^\n]", cpf);
+        getchar();
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
@@ -36,16 +37,23 @@ Paciente *insere_consulta(Paciente * lista_pacientes, int *qnt){
     }
 }
 
-Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes, int id_digitado){
+Paciente *remover_consulta_lista_pacientes(Paciente * lista_pacientes){
     char cpf[20];
     do {
         printf("\nDigite o CPF do paciente que deseja remover a consulta(apenas numeros): ");
         scanf(" %[^\n]", cpf);
+        getchar();
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
         Paciente * aux = encontra_paciente(lista_pacientes, cpf);
-        aux->historico_consultas = remove_consulta(aux->historico_consultas, id_digitado);
+        imprimir_consultas(aux->historico_consultas);
+        int id;
+        printf("\nDigite o id da consulta: ");
+        scanf(" %d", id);
+        getchar();
+        
+        aux->historico_consultas = remove_consulta(aux->historico_consultas, id);
         return lista_pacientes;
     } else {
         printf("\nEsse paciente ainda nao existe.\n");
@@ -60,6 +68,7 @@ Paciente *remover_paciente_lista_pacientes(Paciente * lista_pacientes){
     do {
         printf("\nDigite o CPF do paciente que deseja remover (apenas numeros): ");
         scanf(" %[^\n]", cpf);
+        getchar();
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
@@ -128,6 +137,7 @@ Paciente * editar_paciente_lista_paciente(Paciente *lista_pacientes) {
     do {
         printf("\nDigite o CPF do paciente que deseja editar(apenas numeros): ");
         scanf(" %[^\n]", cpf);
+        getchar();
     } while (numero_inteiroc(cpf) == 0 || strlen(cpf) != 11);
     formata_cpf(cpf);
     if (verifica_cpf_paciente(lista_pacientes, cpf) == 0) {
@@ -153,6 +163,7 @@ Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]) {
                 do {
                     printf("Digite o CPF (apenas numeros): ");
                     scanf(" %[^\n]", cpf_digitado);
+                    getchar();
                 } while (verifica_cpf_paciente_edicao(lista_pacientes, cpf_digitado, cpf_antigo) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
 
                 formata_cpf(cpf_digitado); // Formata o CPF
@@ -160,6 +171,7 @@ Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]) {
                 do {
                     printf("\nDigite o nome do paciente: ");
                     scanf(" %99[^\n]", nome_digitado);
+                    getchar();
                 } while (!contem_apenas_letras(nome_digitado));
 
                 formata_string(nome_digitado);
@@ -167,6 +179,7 @@ Paciente * edita_paciente(Paciente * lista_pacientes, char cpf_antigo[20]) {
                 do {
                     printf("\nDigite a idade do paciente: ");
                     scanf(" %3[^\n]", idade_digitada);
+                    getchar();
                 } while (!numero_inteiroc(idade_digitada));
 
                 strcpy(copia->cpf, cpf_digitado);
@@ -223,6 +236,7 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
     do {
         printf("Digite o CPF (apenas numeros): ");
         scanf(" %[^\n]", cpf_digitado);
+        getchar();
     } while (verifica_cpf_paciente(lista_pacientes, cpf_digitado) == 0 || numero_inteiroc(cpf_digitado) == 0 || strlen(cpf_digitado) != 11);
 
      formata_cpf(cpf_digitado); // Formata o CPF
@@ -230,6 +244,7 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
     do {
         printf("\nDigite o nome do paciente: ");
         scanf(" %99[^\n]", nome_digitado);
+        getchar();
     } while (!contem_apenas_letras(nome_digitado));
 
     formata_string(nome_digitado);
@@ -237,6 +252,7 @@ Paciente novo_paciente(Paciente * lista_pacientes) {
     do {
         printf("\nDigite a idade do paciente: ");
         scanf(" %3[^\n]", idade_digitada);
+        getchar();
     } while (!numero_inteiroc(idade_digitada));
 
     strcpy(novo.cpf, cpf_digitado);

@@ -22,7 +22,6 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
     Paciente paciente_novo;
     Consulta consulta_nova;
     int qnt = 0;
-    int id_digitado;
     lista_para_pacientes= ler_do_arquivo(local_do_arquivo, lista_para_pacientes, &qnt);
 
     while (1) {
@@ -62,9 +61,7 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 system("cls");
             } else if (strcmp(opcao, "4") == 0) {
                 system("cls");
-                printf("\n Qual o ID da consulta: ");
-                scanf("%d", &id_digitado);
-                lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes, id_digitado);
+                lista_para_pacientes = remover_consulta_lista_pacientes(lista_para_pacientes);
                 pressiona_enter();
                 system("cls");
             } else if (strcmp(opcao, "5") == 0) {
@@ -78,6 +75,7 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 char nome_paciente_digitado[100];
                 printf("\nDigite o nome do paciente que deseja buscar:");
                 scanf(" %99[^\n]", nome_paciente_digitado);
+                getchar();
                 buscar_paciente_por_nome(lista_para_pacientes, nome_paciente_digitado);
                 pressiona_enter();
                 system("cls");
