@@ -42,8 +42,7 @@ A organização desse repositório está disposta da seguinte forma:
 │
 └─── resources
         │
-        ├──consultas.txt
-        ├──paciente.txt
+        ├──dados.txt
 │
 └─── src
         │
