@@ -1,10 +1,7 @@
-Paciente:	ALAN ALMEIDA	13944824423	23
+Paciente:	Alan Almeida	13944824423	23
 Consulta: 100	12/12/2024	240,25	eu quero cafe
-Consulta: 104	12/12/2024	321	aaaaaaaaaaaaa
-Paciente:	Fernando	12345678900	20
+Consulta: 110	12/12/2024	120,20	caiu estanho no meu olho
+Paciente:	Fernado Dantas	12345678910	19
 Consulta: 107	12/12/2020	300	aaaaaaaaaa
 Consulta: 108	12/04/2024	100	AAAAAAAA
 Consulta: 109	07/04/2024	400	AAAA
-Paciente:	Maria Clara	32165498700	10
-Consulta: 103	12/12/2020	200	aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa
-Consulta: 106	12/12/2025	200	aaaaaaaaaaa
