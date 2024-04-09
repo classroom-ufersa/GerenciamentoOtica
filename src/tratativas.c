@@ -11,15 +11,22 @@ int numero_inteiroc(char *str) {
 
 int numero_decimal(char *str) {
     int ponto_ou_virgula = 0; 
+    if (!isdigit(str[0])){
+        return 0;
+    }
+    if (!isdigit(str[strlen(str) - 1])){
+        return 0;
+    }
     for (int i = 0; str[i] != '\0'; i++) {
-        if (!isdigit(str[i])) {
-            if (str[i] == '.' || str[i] == ',') {
+
+        if (!(str[i] >= '0' && str[i] <= '9')) {
+            if(str[i] == ','){
                 ponto_ou_virgula++;
                 if (ponto_ou_virgula > 1){
                     return 0;
                 }
-            } 
-            else {
+            }
+            else{
                 return 0;
             }
         }
@@ -50,7 +57,7 @@ int data_valida(char *data) {
     if (ano < (data_atual->tm_year + 1900) ||
         (ano == (data_atual->tm_year + 1900) && mes < (data_atual->tm_mon + 1)) ||
         (ano == (data_atual->tm_year + 1900) && mes == (data_atual->tm_mon + 1) && dia <= data_atual->tm_mday)) {
-        printf("A data fornecida é anterior à data atual.\n");
+        printf("\nA data fornecida esta num formato invalido ou ja passou.\n");
         return 0;
     }
     
@@ -60,7 +67,7 @@ int data_valida(char *data) {
 
     // Verifica se o ano tem 4 dígitos
     if (ano < 1000 || ano > 9999) {
-        printf("Formato de data inválido. O ano deve ter 4 digitos.\n");
+        printf("\nFormato de data inválido. O ano deve ter 4 digitos.\n");
         return 0;
     }
     
