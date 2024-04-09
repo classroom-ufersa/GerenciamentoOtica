@@ -43,7 +43,7 @@ Consulta nova_consulta(int *qnt){
     } while (!data_valida(data)); 
 
     do {
-        printf("Digite o preco: ");
+        printf("Digite o preco (deve haver apenas um ./,): ");
         scanf(" %9[^\n]", preco);
         getchar();
     } while (numero_decimal(preco) == 0);
