@@ -73,9 +73,11 @@ void menu(Paciente *lista_para_pacientes, char *local_do_arquivo) {
                 system("cls");
                 cabecalho("----------------", "Busca Paciente");
                 char nome_paciente_digitado[100];
-                printf("\nDigite o nome do paciente que deseja buscar:");
-                scanf(" %99[^\n]", nome_paciente_digitado);
-                getchar();
+                do{
+                    printf("\nDigite o nome do paciente que deseja buscar:");
+                    scanf(" %99[^\n]", nome_paciente_digitado);
+                    getchar();
+                } while (!contem_apenas_letras(nome_paciente_digitado));
                 buscar_paciente_por_nome(lista_para_pacientes, nome_paciente_digitado);
                 pressiona_enter();
                 system("cls");
