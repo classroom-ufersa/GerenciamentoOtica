@@ -39,21 +39,19 @@ Consulta nova_consulta(int *qnt){
     do {
         printf("Digite a data (DD/MM/AAAA): ");
         scanf(" %[^\n]", data);
-        getchar();
-    } while (!data_valida(data)); 
+    } while (!data_valida(data) || strlen(data) > 10); 
 
     do {
-        printf("Digite o preco (deve haver apenas um ./,): ");
-        scanf(" %9[^\n]", preco);
-        getchar();
-    } while (numero_decimal(preco) == 0);
+        printf("Digite o preco (apenas uma virgula): ");
+        scanf(" %[^\n]", preco);
+        fflush(stdin);
+    } while (numero_decimal(preco) == 0 || strlen(preco) > 9);
     
     do {
         printf("Digite a descricao: ");
         scanf(" %99[^\n]", descricao);
-        getchar();
     } while (contem_apenas_letras(descricao) == 0);
-    
+    fflush(stdin);
     strcpy(consulta.data, data);
     strcpy(consulta.preco, preco);
     strcpy(consulta.descricao, descricao);
